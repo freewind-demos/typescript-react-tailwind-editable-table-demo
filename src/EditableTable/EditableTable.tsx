@@ -8,7 +8,6 @@ type Props<T> = {
 
 export function EditableTable<T>({columns, rows}: Props<T>) {
   return <table className={'table-auto text-sm'}>
-    <tbody>
     <thead>
     <tr>
       {columns.map((column, index) => <th
@@ -36,6 +35,5 @@ export function EditableTable<T>({columns, rows}: Props<T>) {
       </tr>
       </tbody>
     }
-    </tbody>
   </table>
 }
