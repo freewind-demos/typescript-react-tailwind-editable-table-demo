@@ -1,7 +1,7 @@
-TypeScript React tailwind Demo
+TypeScript React tailwind Editable Table Demo
 =================================
 
-在React中以及.pcss中都可以使用tailwind来定制样式
+使用tailwind实现一个可以edit的table，感觉非常良好
 
 在Webstorm中可以很好的支持className的提示和补全
 

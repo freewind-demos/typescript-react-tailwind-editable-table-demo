@@ -1,8 +1,13 @@
 module.exports = {
-  content: [
-  ],
+  content: [],
   theme: {
     extend: {},
   },
   plugins: [],
+  purge: {
+    enabled: true,
+    content: [
+      './dist/*.js',
+    ]
+  }
 }
