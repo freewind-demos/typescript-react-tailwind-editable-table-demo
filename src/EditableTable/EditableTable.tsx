@@ -1,5 +1,5 @@
 import React from 'react';
-import {TableColumn} from '../typings';
+import {TableColumn} from './typings';
 
 type Props<T> = {
   columns: TableColumn<T>[]

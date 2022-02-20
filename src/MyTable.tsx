@@ -1,12 +1,13 @@
 import React, {FC} from 'react'
 import {useMemo} from 'react';
 
-import './MyTable.pcss';
-import {TableColumn} from './typings';
 import {EditableTable} from './EditableTable/EditableTable';
 import {NumberInputCell} from './EditableTable/NumberInputCell';
 import {sum} from './utils';
 import {useEditableTable} from './EditableTable/useEditableTable';
+import {TableColumn} from './EditableTable/typings';
+
+import './MyTable.pcss';
 
 type Row = {
   project: string,

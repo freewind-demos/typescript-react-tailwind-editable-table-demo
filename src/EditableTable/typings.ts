@@ -1,5 +1,4 @@
 import {ReactNode} from 'react';
-import {CSSProperties} from 'react';
 
 export type TableColumn<T> = {
   title?: string,
