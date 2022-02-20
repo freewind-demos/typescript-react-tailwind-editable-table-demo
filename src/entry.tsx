@@ -1,4 +1,4 @@
-import MyTable from './MyTable'
+import {MyTable} from './MyTable'
 import React from 'react'
 import ReactDOM from 'react-dom'
 

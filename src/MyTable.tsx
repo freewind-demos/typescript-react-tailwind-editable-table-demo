@@ -1,14 +1,12 @@
-import React from 'react'
-import {useState} from 'react';
+import React, {FC} from 'react'
 import {useMemo} from 'react';
-import {useCallback} from 'react';
-import {useEffect} from 'react';
 
 import './MyTable.pcss';
 import {TableColumn} from './typings';
 import {EditableTable} from './EditableTable/EditableTable';
 import {NumberInputCell} from './EditableTable/NumberInputCell';
 import {sum} from './utils';
+import {useEditableTable} from './EditableTable/useEditableTable';
 
 type Row = {
   project: string,
@@ -21,38 +19,9 @@ type Row = {
   sat: number
 };
 
-function useEditableTable<T>(newRows: T[]) {
-  const [rows, setRows] = useState(newRows);
-  useEffect(() => {
-    setRows(newRows)
-  }, [JSON.stringify(newRows)])
 
-  const buildColumns = useCallback((callback: (helpers: { updateRow: (index: number, rowChanges: Partial<T>) => void, deleteRow: (index: number) => void }) => TableColumn<T>[]): TableColumn<T>[] => {
-    function updateRow(index: number, rowChanges: Partial<Row>) {
-      setRows(rows => {
-        const newRows = [...rows];
-        newRows.splice(index, 1, {...newRows[index], ...rowChanges})
-        return newRows
-      })
-    }
-
-    function deleteRow(index: number) {
-      setRows(rows => {
-        const newRows = [...rows];
-        newRows.splice(index, 1)
-        return newRows;
-      })
-    }
-
-    return callback({updateRow, deleteRow})
-  }, [])
-
-  return {rows, setRows, buildColumns}
-}
-
-export default function MyTable() {
-
-  const {rows, setRows, buildColumns} = useEditableTable([
+export const MyTable: FC = () => {
+  const {rows, setRows, buildColumns} = useEditableTable<Row>([
     {project: 'project 1', sun: 0, mon: 6, tue: 4, wed: 2, thu: 4, fri: 3, sat: 0},
     {project: 'project 2', sun: 0, mon: 2, tue: 5, wed: 2, thu: 5, fri: 1, sat: 0},
     {project: 'project 3', sun: 0, mon: 4, tue: 2, wed: 2, thu: 4, fri: 3, sat: 0},
@@ -132,16 +101,17 @@ export default function MyTable() {
 
   return <div className={'MyTable'}>
     <EditableTable<Row> columns={bodyColumns} rows={rows}/>
-    <button className={'bg-blue-500 rounded text-white px-4 py-1 hover:bg-blue-700'} onClick={() => setRows(rows => [...rows, {
-      project: '',
-      sun: 0,
-      mon: 0,
-      tue: 0,
-      wed: 0,
-      thu: 0,
-      fri: 0,
-      sat: 0
-    },])}>Add new row
+    <button className={'bg-blue-500 rounded text-white px-4 py-1 hover:bg-blue-700'}
+            onClick={() => setRows(rows => [...rows, {
+              project: '',
+              sun: 0,
+              mon: 0,
+              tue: 0,
+              wed: 0,
+              thu: 0,
+              fri: 0,
+              sat: 0
+            },])}>Add new row
     </button>
   </div>
 }
